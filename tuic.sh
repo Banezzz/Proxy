@@ -102,7 +102,7 @@ Download(){
     rm -rf /etc/tuic
     mkdir -p /etc/tuic
     archAffix
-    DOWNLOAD_LINK="https://github.com/Slotheve/backup/raw/main/tuic-${CPU}"
+    DOWNLOAD_LINK="https://raw.githubusercontent.com/Banezzz/Proxy/main/binaries/tuic-${CPU}"
     colorEcho $YELLOW "下载Tuic: ${DOWNLOAD_LINK}"
     curl -L -H "Cache-Control: no-cache" -o /etc/tuic/tuic ${DOWNLOAD_LINK}
     chmod +x /etc/tuic/tuic

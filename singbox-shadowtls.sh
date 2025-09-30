@@ -969,7 +969,7 @@ menu() {
 			install
 			;;
 		6)
-			bash <(curl -fsSL https://raw.githubusercontent.com/Slotheve/Snell/main/snell.sh)
+			colorEcho $RED "Snell 功能已移除，请使用其他代理协议"
 			;;
 		7)
 			Install_stls

@@ -203,8 +203,15 @@ installmihomo() {
 	archAffix
     rm -rf /etc/mihomo
     mkdir -p /etc/mihomo
-    DOWNLOAD_LINK="https://raw.githubusercontent.com/Slotheve/backup/main/mihomo-linux-${ARCH}.gz"
-    colorEcho $BLUE " 下载mihomo: ${DOWNLOAD_LINK}"
+    # 从官方源下载 mihomo
+    TAG_URL="https://api.github.com/repos/MetaCubeX/mihomo/releases/latest"
+    NEW_VER="$(curl -s "${TAG_URL}" --connect-timeout 10| grep -Eo '\"tag_name\"(.*?)\",' | cut -d\" -f4)"
+    if [[ -z "$NEW_VER" ]]; then
+        colorEcho $RED "获取 mihomo 版本失败，请检查网络"
+        exit 1
+    fi
+    DOWNLOAD_LINK="https://github.com/MetaCubeX/mihomo/releases/download/${NEW_VER}/mihomo-linux-${ARCH}-${NEW_VER}.gz"
+    colorEcho $BLUE " 下载官方mihomo: ${DOWNLOAD_LINK}"
     wget -O /etc/mihomo/mihomo.gz ${DOWNLOAD_LINK}
     if [ $? != 0 ];then
         colorEcho $RED " 下载mihomo文件失败，请检查服务器网络设置"
